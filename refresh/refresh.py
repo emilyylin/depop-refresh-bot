@@ -3,16 +3,20 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from dotenv import load_dotenv
 import pickle
 import time
 import os
 
-# Path to your ChromeDriver
-CHROMEDRIVER_PATH = 'C:/Users/emily/Downloads/chromedriver-win64/chromedriver.exe'
+# Load environment variables from the .env file
+load_dotenv()
+
+# Access the variables
+CHROMEDRIVER_PATH = os.getenv("CHROMEDRIVER_PATH")
+DEPOP_PROFILE_URL = os.getenv("DEPOP_PROFILE_URL")
 
 # Path to save/load cookies
 COOKIES_FILE = 'depop_cookies.pkl'
-
 
 def save_cookies(driver, cookies_path):
     """
@@ -60,6 +64,10 @@ def scroll_to_load_all_items(driver):
     print("Finished scrolling, all items should be loaded.")
 
 def find_unsold_items(driver):
+
+    # Close the tab and switch back
+    driver.get(DEPOP_PROFILE_URL)
+    time.sleep(2) 
 
     #scrolls to the bottom of page to load all items
     scroll_to_load_all_items(driver)
@@ -131,10 +139,7 @@ def refresh_items(driver):
 
         except Exception as e:
             print(f"Could not refresh item: {e}")
-
-        # Close the tab and switch back
-        driver.get("https://www.depop.com/anklebiterx")
-        time.sleep(2)       
+      
 
 if __name__ == "__main__":
     # Set up ChromeDriver
@@ -148,7 +153,7 @@ if __name__ == "__main__":
         # Load cookies and log in automatically
         load_cookies(driver, COOKIES_FILE)
 
-        driver.get("https://www.depop.com/anklebiterx")
+        driver.get(DEPOP_PROFILE_URL)
         time.sleep(5)  # Wait for the page to load
 
         # Refresh all items on your Depop profile
