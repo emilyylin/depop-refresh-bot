@@ -169,6 +169,7 @@ let sum = numbers.reduce((acc, val) => acc + val, 0); // O(n)
 ### **Sorting & Joining**
 ```typescript
 numbers.sort((a, b) => a - b); // Ascending sort O(n log n)
+numbers.sort((a, b) => a[0] - b[0]); // Ascending sort O(n log n) of 2d array by first index
 console.log(numbers.join(", ")); // "1, 2, 3, 4, 5" O(n)
 ```
 
