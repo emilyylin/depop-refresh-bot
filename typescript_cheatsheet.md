@@ -3,249 +3,148 @@
 ## **1️⃣ String Manipulation**
 
 ### **String Declaration**
-
 ```typescript
 let str: string = "Hello, TypeScript!";
 let multiLine: string = `This is a multi-line string.`;
 ```
+⏳ **Time Complexity:** O(1)
 
 ### **Concatenation**
-
 ```typescript
 let fullName = firstName + " Doe"; // "John Doe"
 let message = `Hello, ${firstName}`; // "Hello, John"
 ```
-
-### **Length & Character Access**
-
-```typescript
-console.log(str.length); // Get length
-console.log(str[0]); // Access character
-```
-
-### **Changing Case**
-
-```typescript
-console.log(str.toUpperCase()); // "HELLO"
-console.log(str.toLowerCase()); // "hello"
-```
+⏳ **Time Complexity:** O(n)
 
 ### **Checking for Substrings**
-
 ```typescript
 console.log(str.includes("Type")); // true
 console.log(str.startsWith("Hello")); // true
 console.log(str.endsWith("Script")); // true
+console.log(str.indexOf("Type")); // 0 (if found) or -1 (if not found)
 ```
-
-### **Extracting Parts**
-
-```typescript
-console.log(str.slice(0, 4)); // "Type"
-console.log(str.substring(4)); // "Script"
-```
-
-### **Replacing Strings**
-
-```typescript
-console.log(str.replace("Type", "Java")); // "JavaScript"
-console.log(str.replaceAll("a", "X")); // Replaces all occurrences
-```
-
-### **Trimming**
-
-```typescript
-console.log(str.trim()); // Removes whitespace
-```
-
-### **Splitting & Joining**
-
-```typescript
-let arr = str.split(" ");
-console.log(arr.join("-")); // Join with "-"
-```
+⏳ **Time Complexity:** O(n)
 
 ---
 
 ## **2️⃣ Function Methods**
 
-### **Function Declaration**
-
+### **Async/Await**
 ```typescript
-function greet(name: string): string {
-    return `Hello, ${name}!`;
+async function fetchData() {
+    let response = await fetch('https://api.example.com/data');
+    let data = await response.json();
+    console.log(data);
 }
 ```
+⏳ **Time Complexity:** Depends on the API call
 
-### **Arrow Functions**
+---
 
+## **3️⃣ Math Functions**
 ```typescript
-const greet = (name: string) => `Hello, ${name}!`;
+console.log(Math.abs(-10)); // 10
+console.log(Math.ceil(4.3)); // 5
+console.log(Math.floor(4.9)); // 4
+console.log(Math.round(4.5)); // 5
+console.log(Math.max(10, 20, 5)); // 20
+console.log(Math.min(10, 20, 5)); // 5
+console.log(Math.sqrt(25)); // 5
+console.log(Math.pow(2, 3)); // 8
+console.log(Math.random()); // Random number between 0 and 1
+```
+⏳ **Time Complexity:** O(1)
+
+---
+
+## **4️⃣ Important TypeScript Types**
+
+### **Primitive Types**
+```typescript
+let isDone: boolean = false;
+let count: number = 42;
+let userName: string = "Alice";
+let notDefined: undefined = undefined;
+let empty: null = null;
 ```
 
-### **Default Parameters**
-
+### **Array Types**
 ```typescript
-function greet(name: string = "User") {
-    return `Hello, ${name}!`;
+let numbers: number[] = [1, 2, 3];
+let words: Array<string> = ["hello", "world"];
+```
+
+### **Tuple Types**
+```typescript
+let tuple: [string, number] = ["Alice", 25];
+```
+
+### **Enum Types**
+```typescript
+enum Color {
+    Red,
+    Green,
+    Blue
 }
+let c: Color = Color.Green;
 ```
 
-### **Rest Parameters**
-
+### **Union Types**
 ```typescript
-function sum(...numbers: number[]) {
-    return numbers.reduce((acc, val) => acc + val, 0);
+let value: string | number;
+value = "Hello";
+value = 42;
+```
+
+### **Type Aliases**
+```typescript
+type Point = { x: number; y: number };
+let p: Point = { x: 10, y: 20 };
+```
+
+### **Interfaces**
+```typescript
+interface Person {
+    name: string;
+    age: number;
 }
+let person: Person = { name: "Alice", age: 25 };
 ```
 
-### **Callback Functions**
-
+### **Generics**
 ```typescript
-function process(value: number, callback: (n: number) => void) {
-    callback(value * 2);
+function identity<T>(arg: T): T {
+    return arg;
 }
-```
-
-### **Immediately Invoked Function**
-
-```typescript
-(() => { console.log("Hello!"); })();
+console.log(identity<string>("Hello"));
+console.log(identity<number>(42));
 ```
 
 ---
 
-## **3️⃣ Map Methods**
+## **5️⃣ Other Useful Methods**
 
-### **Creating a Map**
-
+### **Date Methods**
 ```typescript
-const myMap = new Map<number, string>();
+let now = new Date();
+console.log(now.toISOString()); // Prints current date/time in ISO format
+console.log(now.getFullYear()); // 2023
+console.log(now.getMonth()); // 0-based month index
+console.log(now.getDate()); // Day of the month
+console.log(now.getHours());
 ```
+⏳ **Time Complexity:** O(1)
 
-### **Setting Values**
-
+### **Set Methods**
 ```typescript
-myMap.set(1, "One");
+const mySet = new Set<number>();
+mySet.add(1);
+mySet.has(1); // true
+mySet.delete(1);
 ```
-
-### **Getting Values**
-
-```typescript
-console.log(myMap.get(1)); // "One"
-```
-
-### **Checking Key Existence**
-
-```typescript
-console.log(myMap.has(2)); // false
-```
-
-### **Deleting Keys**
-
-```typescript
-myMap.delete(1);
-```
-
-### **Looping Over Map**
-
-```typescript
-for (let [key, value] of myMap.entries()) { console.log(key, value); }
-```
+⏳ **Time Complexity:** O(1)
 
 ---
 
-## **4️⃣ Array Methods**
-
-### **Creating an Array**
-
-```typescript
-let numbers: number[] = [1, 2, 3, 4, 5];
-```
-
-### **Adding Elements**
-
-```typescript
-numbers.push(6); // [1, 2, 3, 4, 5, 6]
-```
-
-### **Removing Elements**
-
-```typescript
-numbers.pop(); // Removes last item
-numbers.shift(); // Removes first item
-```
-
-### **Finding Elements**
-
-```typescript
-console.log(numbers.indexOf(3)); // Returns index of 3
-```
-
-### **Filtering**
-
-```typescript
-let even = numbers.filter(n => n % 2 === 0);
-```
-
-### **Mapping**
-
-```typescript
-let doubled = numbers.map(n => n * 2);
-```
-
-### **Reducing**
-
-```typescript
-let sum = numbers.reduce((acc, val) => acc + val, 0);
-```
-
-### **Sorting**
-
-```typescript
-numbers.sort((a, b) => a - b); // Ascending sort
-```
-
-### **Joining**
-
-```typescript
-console.log(numbers.join(", ")); // "1, 2, 3, 4, 5"
-```
-
----
-
-## **5️⃣ Palindrome & Character Frequency**
-
-### **Checking for Palindromes**
-
-```typescript
-function isPalindrome(str: string): boolean {
-    const cleanStr = str.toLowerCase().replace(/[^a-z0-9]/g, "");
-    return cleanStr === cleanStr.split("").reverse().join("");
-}
-```
-
-### **Reversing a String**
-
-```typescript
-function reverseString(str: string): string {
-    return str.split("").reverse().join("");
-}
-```
-
-### **Counting Character Frequency**
-
-```typescript
-function charFrequency(str: string): Record<string, number> {
-    const freq: Record<string, number> = {};
-    for (const char of str) {
-        freq[char] = (freq[char] || 0) + 1;
-    }
-    return freq;
-}
-```
-
----
-
-This cheat sheet provides a quick reference to commonly used TypeScript methods. 🚀 Happy coding! 🎉
+This cheat sheet provides a quick reference to commonly used TypeScript methods, types, async/await, and math functions. 🚀 Happy coding! 🎉
 
