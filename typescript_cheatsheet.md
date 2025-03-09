@@ -327,5 +327,110 @@ myPromise
 
 ---
 
-This cheat sheet provides a quick reference to commonly used TypeScript methods, types, async/await, math functions, React hooks, array & map operations, and event handling. 🚀 Happy coding! 🎉
+## **🔟 React Hooks with TypeScript**
 
+### **useState**
+```typescript
+const [count, setCount] = useState<number>(0);
+setCount(count + 1);
+```
+
+### **useEffect**
+```typescript
+useEffect(() => {
+    console.log("Component mounted");
+    return () => console.log("Component unmounted");
+}, []);
+```
+
+### **useRef**
+```typescript
+const inputRef = useRef<HTMLInputElement>(null);
+```
+
+### **useContext**
+```typescript
+const theme = useContext(ThemeContext);
+```
+
+### **useMemo**
+```typescript
+const computedValue = useMemo(() => heavyComputation(), [dependency]);
+```
+
+### **useCallback**
+```typescript
+const memoizedFunction = useCallback(() => console.log("Called!"), []);
+```
+
+### **useReducer**
+```typescript
+type State = { count: number };
+type Action = { type: "increment" } | { type: "decrement" };
+
+function reducer(state: State, action: Action): State {
+    switch (action.type) {
+        case "increment":
+            return { count: state.count + 1 };
+        case "decrement":
+            return { count: state.count - 1 };
+        default:
+            return state;
+    }
+}
+
+const [state, dispatch] = useReducer(reducer, { count: 0 });
+```
+
+⏳ **Time Complexity:** Hook execution time varies but is generally **O(1)** for setting values, and **O(n)** for dependencies in `useEffect` and `useMemo`.
+
+---
+
+## **1️⃣1️⃣ Understanding `setTimeout`**
+
+### **Basic `setTimeout` Usage**
+```typescript
+setTimeout(() => {
+    console.log("Executed after 2 seconds");
+}, 2000);
+```
+⏳ **Time Complexity:** O(1) (scheduling) but callback execution depends on the delay.
+
+### **Using `setTimeout` with Variables**
+```typescript
+const timer = setTimeout(() => {
+    console.log("This runs once after 3 seconds");
+}, 3000);
+```
+
+### **Clearing a Timeout**
+```typescript
+clearTimeout(timer);
+```
+This prevents the scheduled function from running if it hasn't executed yet.
+
+### **Using `setTimeout` in a Loop**
+```typescript
+for (let i = 1; i <= 3; i++) {
+    setTimeout(() => {
+        console.log(`Executed after ${i} second(s)`);
+    }, i * 1000);
+}
+```
+
+### **Using `setTimeout` with Promises**
+```typescript
+function delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function delayedMessage() {
+    await delay(2000);
+    console.log("This message appears after 2 seconds");
+}
+
+delayedMessage();
+```
+⏳ **Time Complexity:** O(1) for scheduling, O(n) if used in loops with dependent execution.
+
+---
