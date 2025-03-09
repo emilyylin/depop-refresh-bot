@@ -262,5 +262,70 @@ mySet.delete(1);
 
 ---
 
+## **9️⃣ Promises & Async Handling**
+
+### **Creating a Promise**
+```typescript
+const myPromise = new Promise<number>((resolve, reject) => {
+    setTimeout(() => {
+        resolve(42); // Resolve with a value after 1 second
+    }, 1000);
+});
+```
+
+### **Handling a Promise with `.then()`**
+```typescript
+myPromise.then(value => {
+    console.log("Resolved with value:", value);
+}).catch(error => {
+    console.error("Promise rejected:", error);
+});
+```
+
+### **Using `async/await` with Promises**
+```typescript
+async function fetchData(): Promise<void> {
+    try {
+        const value = await myPromise;
+        console.log("Fetched value:", value);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+fetchData();
+```
+
+### **Multiple Promises with `Promise.all`**
+```typescript
+const promise1 = Promise.resolve(10);
+const promise2 = new Promise((resolve) => setTimeout(() => resolve(20), 2000));
+
+Promise.all([promise1, promise2]).then(values => {
+    console.log("Resolved values:", values); // [10, 20]
+});
+```
+
+### **Handling the First Resolved Promise with `Promise.race`**
+```typescript
+const fastPromise = new Promise(resolve => setTimeout(() => resolve("Fast!"), 500));
+const slowPromise = new Promise(resolve => setTimeout(() => resolve("Slow!"), 2000));
+
+Promise.race([fastPromise, slowPromise]).then(result => {
+    console.log("First resolved:", result); // "Fast!"
+});
+```
+
+### **Chaining Promises**
+```typescript
+myPromise
+    .then(value => value * 2)
+    .then(newValue => console.log("Doubled value:", newValue))
+    .catch(error => console.error("Error in chain:", error));
+```
+
+⏳ **Time Complexity:** Varies depending on the number of promises and execution time.
+
+---
+
 This cheat sheet provides a quick reference to commonly used TypeScript methods, types, async/await, math functions, React hooks, array & map operations, and event handling. 🚀 Happy coding! 🎉
 
