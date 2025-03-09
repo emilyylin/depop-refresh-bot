@@ -325,6 +325,54 @@ myPromise
 
 ⏳ **Time Complexity:** Varies depending on the number of promises and execution time.
 
+### **Looping Through Promises with `for...of` and `Promise.all`**
+```typescript
+const urls = ["https://api.example.com/1", "https://api.example.com/2"];
+
+async function fetchAllData() {
+    for (const url of urls) {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log("Data from", url, data);
+        } catch (error) {
+            console.error("Error fetching", url, error);
+        }
+    }
+}
+fetchAllData();
+```
+
+### **Looping Through Promises in Parallel with `Promise.all`**
+```typescript
+async function fetchParallel() {
+    try {
+        const responses = await Promise.all(urls.map(url => fetch(url)));
+        const data = await Promise.all(responses.map(res => res.json()));
+        console.log("Fetched all data:", data);
+    } catch (error) {
+        console.error("Error fetching data", error);
+    }
+}
+fetchParallel();
+```
+
+### **Using `forEach` with Promises (Caution)**
+```typescript
+urls.forEach(async (url) => {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log("Data from", url, data);
+    } catch (error) {
+        console.error("Error fetching", url, error);
+    }
+});
+```
+⚠ **Warning:** `forEach` does not wait for `await`, so results may be unpredictable.
+
+⏳ **Time Complexity:** O(n) for sequential loops, O(1) for `Promise.all` in parallel execution.
+
 ---
 
 ## **🔟 React Hooks with TypeScript**
