@@ -636,3 +636,66 @@ console.log(differenceSet); // Set { 1, 2 }
 ⏳ **Time Complexity:** O(n)
 
 ---
+
+## **1️⃣5️⃣ Local Storage Methods**
+
+### **Setting an Item in Local Storage**
+```typescript
+localStorage.setItem("username", "Alice");
+```
+🔹 **What it does:** Stores a key-value pair in local storage.
+🔹 **When to use:** When persisting user settings, authentication tokens, or small data across sessions.
+
+### **Getting an Item from Local Storage**
+```typescript
+const username = localStorage.getItem("username");
+console.log(username); // "Alice"
+```
+🔹 **What it does:** Retrieves a value stored in local storage.
+🔹 **When to use:** When reading saved user preferences or authentication state.
+
+### **Removing an Item from Local Storage**
+```typescript
+localStorage.removeItem("username");
+```
+🔹 **What it does:** Deletes a specific key from local storage.
+🔹 **When to use:** When logging out a user or clearing specific settings.
+
+### **Clearing All Local Storage Data**
+```typescript
+localStorage.clear();
+```
+🔹 **What it does:** Removes all stored key-value pairs.
+🔹 **When to use:** When resetting app settings or logging out all users.
+
+### **Storing Objects in Local Storage**
+```typescript
+const user = { name: "Alice", age: 25 };
+localStorage.setItem("user", JSON.stringify(user));
+```
+🔹 **What it does:** Stores objects as strings in local storage.
+🔹 **When to use:** When saving structured data like user profiles or app settings.
+
+### **Retrieving and Parsing Objects from Local Storage**
+```typescript
+const storedUser = localStorage.getItem("user");
+const userObject = storedUser ? JSON.parse(storedUser) : null;
+console.log(userObject); // { name: "Alice", age: 25 }
+```
+🔹 **What it does:** Retrieves and parses stored JSON data.
+🔹 **When to use:** When reading structured data previously saved in local storage.
+
+### **Checking if a Key Exists in Local Storage**
+```typescript
+if (localStorage.getItem("username")) {
+    console.log("Username exists in storage");
+}
+```
+🔹 **What it does:** Checks whether a key is present in local storage.
+🔹 **When to use:** When conditionally handling stored values.
+
+⏳ **Time Complexity:** All local storage operations are **O(1)** because they operate on a key-value store.
+
+---
+
+
