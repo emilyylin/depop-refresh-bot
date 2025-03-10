@@ -171,46 +171,6 @@ myMap.clear(); // Removes all entries O(n)
 
 ## **6️⃣ React Hooks**
 
-### **useState**
-
-```typescript
-const [count, setCount] = useState(0);
-setCount(count + 1);
-```
-
-### **useEffect**
-* dependency array: will retrigger when value in dependency array is updated
-* allows you to perform SIDE EFFECTS in function components, like fetching from an API, managing timers/intervals
-```typescript
-useEffect(() => {
-    console.log("Component mounted");
-    return () => console.log("Component unmounted");
-}, []);
-```
-
-### **useRef**
-*  helps persist values between renders without triggering re-renders
-```typescript
-const inputRef = useRef<HTMLInputElement>(null);
-```
-
-### **useContext**
-
-```typescript
-const theme = useContext(ThemeContext);
-```
-
-### **useMemo**
-
-```typescript
-const computedValue = useMemo(() => heavyComputation(), [dependency]);
-```
-
-### **useCallback**
-
-```typescript
-const memoizedFunction = useCallback(() => console.log("Called!"), []);
-```
 
 ---
 
@@ -378,41 +338,66 @@ urls.forEach(async (url) => {
 
 ## **🔟 React Hooks with TypeScript**
 
-### **useState**
+React hooks allow functional components to manage state and lifecycle events.
+
+### **useState - Manage Component State**
 ```typescript
 const [count, setCount] = useState<number>(0);
 setCount(count + 1);
 ```
+🔹 **What it does:** Manages local component state.
+🔹 **When to use:** When you need a stateful value that changes over time.
 
-### **useEffect**
+### **useEffect - Side Effects & Lifecycle Events**
 ```typescript
 useEffect(() => {
     console.log("Component mounted");
     return () => console.log("Component unmounted");
 }, []);
 ```
+🔹 **What it does:** Runs side effects (fetching data, subscriptions, etc.) after rendering.
+🔹 **When to use:** When you need to run code on mount, unmount, or dependency updates.
 
-### **useRef**
+### **onMount - Equivalent to `useEffect(() => {}, [])`**
+(Only applicable in frameworks like Svelte, not React.)
+```typescript
+useEffect(() => {
+    console.log("Component mounted");
+}, []);
+```
+🔹 **What it does:** Runs once when the component mounts.
+🔹 **When to use:** When you need setup logic only once.
+
+### **useRef - Reference DOM Elements & Persist Values**
 ```typescript
 const inputRef = useRef<HTMLInputElement>(null);
+useEffect(() => inputRef.current?.focus(), []);
 ```
+🔹 **What it does:** Stores a reference to a DOM element or value across renders without re-triggering renders.
+🔹 **When to use:** When you need to interact with DOM elements directly.
 
-### **useContext**
+### **useContext - Consume Context Values**
 ```typescript
 const theme = useContext(ThemeContext);
 ```
+🔹 **What it does:** Provides access to values from a React context.
+🔹 **When to use:** When multiple components need access to shared state without prop drilling.
 
-### **useMemo**
+### **useMemo - Optimize Expensive Calculations**
 ```typescript
 const computedValue = useMemo(() => heavyComputation(), [dependency]);
 ```
+🔹 **What it does:** Caches computed values and only recalculates when dependencies change.
+🔹 **When to use:** When an expensive calculation shouldn't run on every render.
 
-### **useCallback**
+### **useCallback - Optimize Function References**
 ```typescript
 const memoizedFunction = useCallback(() => console.log("Called!"), []);
 ```
+🔹 **What it does:** Caches function references to prevent unnecessary re-renders.
+🔹 **When to use:** When passing functions as props to prevent child components from re-rendering.
 
-### **useReducer**
+### **useReducer - Manage Complex State Logic**
 ```typescript
 type State = { count: number };
 type Action = { type: "increment" } | { type: "decrement" };
@@ -430,6 +415,8 @@ function reducer(state: State, action: Action): State {
 
 const [state, dispatch] = useReducer(reducer, { count: 0 });
 ```
+🔹 **What it does:** Manages state transitions based on dispatched actions.
+🔹 **When to use:** When state logic is complex or depends on previous state values.
 
 ⏳ **Time Complexity:** Hook execution time varies but is generally **O(1)** for setting values, and **O(n)** for dependencies in `useEffect` and `useMemo`.
 
