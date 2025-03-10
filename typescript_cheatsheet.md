@@ -482,3 +482,86 @@ delayedMessage();
 ⏳ **Time Complexity:** O(1) for scheduling, O(n) if used in loops with dependent execution.
 
 ---
+
+## **1️⃣2️⃣ Object Functions**
+
+### **Iterating Over Object Properties**
+
+#### **Using `Object.keys()`**
+```typescript
+const person = { name: "Alice", age: 25, city: "New York" };
+Object.keys(person).forEach(key => {
+    console.log(`${key}: ${person[key as keyof typeof person]}`);
+});
+```
+⏳ **Time Complexity:** O(n)
+
+#### **Using `Object.values()`**
+```typescript
+Object.values(person).forEach(value => {
+    console.log(value);
+});
+```
+⏳ **Time Complexity:** O(n)
+
+#### **Using `Object.entries()`**
+```typescript
+Object.entries(person).forEach(([key, value]) => {
+    console.log(`${key}: ${value}`);
+});
+```
+⏳ **Time Complexity:** O(n)
+
+### **Checking Object Properties**
+```typescript
+console.log("name" in person); // true
+console.log(person.hasOwnProperty("age")); // true
+```
+⏳ **Time Complexity:** O(1)
+
+### **Merging Objects**
+#### **Using `Object.assign()`**
+```typescript
+const obj1 = { a: 1 };
+const obj2 = { b: 2 };
+const merged = Object.assign({}, obj1, obj2);
+console.log(merged); // { a: 1, b: 2 }
+```
+⏳ **Time Complexity:** O(n)
+
+#### **Using Spread Operator (`...`)**
+```typescript
+const mergedSpread = { ...obj1, ...obj2 };
+console.log(mergedSpread); // { a: 1, b: 2 }
+```
+⏳ **Time Complexity:** O(n)
+
+### **Cloning Objects**
+```typescript
+const cloned = { ...person };
+console.log(cloned);
+```
+⏳ **Time Complexity:** O(n)
+
+### **Deep Copying an Object**
+```typescript
+const deepCopy = JSON.parse(JSON.stringify(person));
+console.log(deepCopy);
+```
+⏳ **Time Complexity:** O(n)
+
+### **Freezing & Sealing Objects**
+#### **Freezing (`Object.freeze`)**
+```typescript
+const frozenObj = Object.freeze({ name: "Frozen" });
+frozenObj.name = "New"; // Error in strict mode
+```
+⏳ **Time Complexity:** O(n)
+
+#### **Sealing (`Object.seal`)**
+```typescript
+const sealedObj = Object.seal({ name: "Sealed" });
+sealedObj.name = "Updated"; // Allowed
+sealedObj.newProp = "Error"; // Not allowed
+```
+⏳ **Time Complexity:** O(n)
