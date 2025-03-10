@@ -565,3 +565,86 @@ sealedObj.name = "Updated"; // Allowed
 sealedObj.newProp = "Error"; // Not allowed
 ```
 ⏳ **Time Complexity:** O(n)
+
+---
+
+## **1️⃣3️⃣ Set Methods**
+
+### **Creating a Set**
+```typescript
+const mySet = new Set<number>();
+mySet.add(1);
+mySet.add(2);
+mySet.add(3);
+console.log(mySet); // Set { 1, 2, 3 }
+```
+⏳ **Time Complexity:** O(1) per `.add()` operation
+
+### **Checking for Existence**
+```typescript
+console.log(mySet.has(2)); // true
+console.log(mySet.has(5)); // false
+```
+⏳ **Time Complexity:** O(1)
+
+### **Deleting an Element**
+```typescript
+mySet.delete(2);
+console.log(mySet); // Set { 1, 3 }
+```
+⏳ **Time Complexity:** O(1)
+
+### **Clearing the Set**
+```typescript
+mySet.clear();
+console.log(mySet); // Set {}
+```
+⏳ **Time Complexity:** O(n)
+
+### **Iterating Over a Set**
+#### **Using `forEach()`**
+```typescript
+mySet.forEach(value => {
+    console.log(value);
+});
+```
+#### **Using `for...of` Loop**
+```typescript
+for (const value of mySet) {
+    console.log(value);
+}
+```
+⏳ **Time Complexity:** O(n)
+
+### **Converting a Set to an Array**
+```typescript
+const setArray = [...mySet];
+console.log(setArray);
+```
+⏳ **Time Complexity:** O(n)
+
+### **Performing Set Operations**
+#### **Union**
+```typescript
+const setA = new Set([1, 2, 3]);
+const setB = new Set([3, 4, 5]);
+const unionSet = new Set([...setA, ...setB]);
+console.log(unionSet); // Set { 1, 2, 3, 4, 5 }
+```
+⏳ **Time Complexity:** O(n)
+
+#### **Intersection**
+```typescript
+const intersectionSet = new Set([...setA].filter(x => setB.has(x)));
+console.log(intersectionSet); // Set { 3 }
+```
+⏳ **Time Complexity:** O(n)
+
+#### **Difference**
+```typescript
+const differenceSet = new Set([...setA].filter(x => !setB.has(x)));
+console.log(differenceSet); // Set { 1, 2 }
+```
+⏳ **Time Complexity:** O(n)
+
+---
