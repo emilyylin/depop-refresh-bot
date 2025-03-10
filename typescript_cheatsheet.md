@@ -170,8 +170,63 @@ myMap.clear(); // Removes all entries O(n)
 
 ---
 
-## **6️⃣ React Hooks**
+## **6️⃣ JSON Methods**
+### **Converting an Object to a JSON String (`JSON.stringify`)**
+```typescript
+const user = { name: "Alice", age: 25 };
+const jsonString = JSON.stringify(user);
+console.log(jsonString); // '{"name":"Alice","age":25}'
+```
+🔹 **What it does:** Converts a JavaScript object into a JSON string.
+🔹 **When to use:** When storing objects in local storage, sending data over APIs, or logging structured data.
 
+### **Parsing a JSON String into an Object (`JSON.parse`)**
+```typescript
+const parsedObject = JSON.parse(jsonString);
+console.log(parsedObject.name); // "Alice"
+```
+🔹 **What it does:** Converts a JSON string into a JavaScript object.
+🔹 **When to use:** When reading data from APIs, local storage, or other JSON-based sources.
+
+### **Handling Errors with `try/catch`**
+```typescript
+try {
+    const data = JSON.parse('{ "name": "Alice" }');
+    console.log(data.name);
+} catch (error) {
+    console.error("Invalid JSON format", error);
+}
+```
+🔹 **What it does:** Catches syntax errors when parsing an invalid JSON string.
+🔹 **When to use:** When handling dynamic JSON data from APIs or user input.
+
+### **Formatting JSON with Indentation**
+```typescript
+const formattedJSON = JSON.stringify(user, null, 2);
+console.log(formattedJSON);
+```
+🔹 **What it does:** Pretty-prints JSON with indentation.
+🔹 **When to use:** When logging JSON or generating human-readable JSON files.
+
+### **Filtering Keys While Stringifying (`replacer` Function)**
+```typescript
+const filteredJSON = JSON.stringify(user, ["name"]);
+console.log(filteredJSON); // '{"name":"Alice"}'
+```
+🔹 **What it does:** Includes only specific keys while converting to JSON.
+🔹 **When to use:** When stripping sensitive data before sending it over an API.
+
+### **Modifying Values While Parsing (`reviver` Function)**
+```typescript
+const modifiedObject = JSON.parse('{ "age": "25" }', (key, value) =>
+    key === "age" ? Number(value) : value
+);
+console.log(modifiedObject.age); // 25 (as a number)
+```
+🔹 **What it does:** Modifies parsed values dynamically.
+🔹 **When to use:** When transforming data types while parsing JSON.
+
+⏳ **Time Complexity:** `JSON.stringify()` and `JSON.parse()` have a time complexity of **O(n)**, where `n` is the size of the object.
 
 ---
 
