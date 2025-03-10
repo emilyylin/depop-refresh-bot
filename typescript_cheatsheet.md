@@ -1,4 +1,5 @@
 # **TypeScript Cheat Sheet**
+Cheat sheet built with CHATGPT :o
 
 ## **1️⃣ String Manipulation**
 
