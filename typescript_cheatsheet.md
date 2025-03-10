@@ -179,7 +179,8 @@ setCount(count + 1);
 ```
 
 ### **useEffect**
-
+* dependency array: will retrigger when value in dependency array is updated
+* allows you to perform SIDE EFFECTS in function components, like fetching from an API, managing timers/intervals
 ```typescript
 useEffect(() => {
     console.log("Component mounted");
@@ -188,7 +189,7 @@ useEffect(() => {
 ```
 
 ### **useRef**
-
+*  helps persist values between renders without triggering re-renders
 ```typescript
 const inputRef = useRef<HTMLInputElement>(null);
 ```
