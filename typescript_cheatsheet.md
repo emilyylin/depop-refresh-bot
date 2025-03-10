@@ -754,4 +754,111 @@ if (localStorage.getItem("username")) {
 
 ---
 
+## **1️⃣7️⃣ Fetch API & HTTP Requests**
+
+### **Basic Fetch Request**
+```typescript
+fetch("https://api.example.com/data")
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error("Fetch error:", error));
+```
+🔹 **What it does:** Sends a GET request to the specified URL and parses the JSON response.
+🔹 **When to use:** When fetching data from an API.
+
+### **Using `async/await` with Fetch**
+```typescript
+async function fetchData() {
+    try {
+        const response = await fetch("https://api.example.com/data");
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+fetchData();
+```
+🔹 **What it does:** Fetches data using `async/await` for better readability.
+🔹 **When to use:** When handling API requests inside async functions.
+
+### **Making a POST Request**
+```typescript
+async function postData(url: string, payload: object) {
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        console.log("Response:", data);
+    } catch (error) {
+        console.error("Error posting data:", error);
+    }
+}
+
+postData("https://api.example.com/data", { name: "Alice", age: 25 });
+```
+🔹 **What it does:** Sends a POST request with a JSON payload.
+🔹 **When to use:** When submitting data to a server.
+
+### **Handling Fetch Errors**
+```typescript
+async function safeFetch(url: string) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Fetch failed:", error);
+    }
+}
+```
+🔹 **What it does:** Checks if the response is successful before parsing.
+🔹 **When to use:** When handling potential HTTP errors.
+
+### **Using `AbortController` to Cancel Requests**
+```typescript
+const controller = new AbortController();
+const signal = controller.signal;
+
+fetch("https://api.example.com/data", { signal })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error("Fetch error:", error));
+
+// Cancel the request
+controller.abort();
+```
+🔹 **What it does:** Allows canceling a fetch request before completion.
+🔹 **When to use:** When handling timeouts or user-triggered cancellations.
+
+### **Setting Request Timeouts**
+```typescript
+async function fetchWithTimeout(url: string, timeout = 5000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        return await response.json();
+    } catch (error) {
+        console.error("Request timed out or failed:", error);
+    }
+}
+fetchWithTimeout("https://api.example.com/data", 3000);
+```
+🔹 **What it does:** Aborts the request if it takes longer than the given timeout.
+🔹 **When to use:** When limiting API request durations to prevent hanging operations.
+
+⏳ **Time Complexity:** Fetch operations depend on network conditions, but parsing and handling JSON are **O(n)**.
+
+---
+
 
