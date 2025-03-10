@@ -147,6 +147,87 @@ numbers.sort((a, b) => a - b); // Ascending sort O(n log n)
 console.log(numbers.join(", ")); // "1, 2, 3, 4, 5" O(n)
 ```
 
+### **Basic Iteration**
+
+```typescript
+const numbers: number[] = [1, 2, 3, 4, 5];
+numbers.forEach(num => console.log(num)); // O(n)
+```
+
+### **Using `for...of` Loop**
+
+```typescript
+for (const num of numbers) {
+    console.log(num);
+} // O(n)
+```
+
+### **Using `for...in` Loop (Enumerating Indexes)**
+
+```typescript
+for (const index in numbers) {
+    console.log(index, numbers[index]);
+} // O(n)
+```
+
+### **Mapping Elements**
+
+```typescript
+const squared = numbers.map(n => n * n);
+console.log(squared); // [1, 4, 9, 16, 25] // O(n)
+```
+
+### **Filtering Elements**
+
+```typescript
+const evens = numbers.filter(n => n % 2 === 0);
+console.log(evens); // [2, 4] // O(n)
+```
+
+### **Reducing an Array**
+
+```typescript
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+console.log(sum); // 15 // O(n)
+```
+
+### **Looping Through a 2D Array (Row by Row)**
+
+```typescript
+const matrix: number[][] = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+for (const row of matrix) {
+    for (const value of row) {
+        console.log(value);
+    }
+} // O(n * m)
+```
+
+### **Looping Through a 2D Array with Indexes**
+
+```typescript
+for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+        console.log(`Element at [${i}][${j}]:`, matrix[i][j]);
+    }
+} // O(n * m)
+```
+
+### **Looping with `entries()` (Index & Value Pairing)**
+
+```typescript
+for (const [index, value] of numbers.entries()) {
+    console.log(`Index: ${index}, Value: ${value}`);
+} // O(n)
+```
+
+⏳ **Time Complexity:** All array iterations are **O(n)**, except **nested loops over 2D arrays, which are O(n × m)**.
+
+---
+
 ---
 
 ## **5️⃣ Map Methods**
